@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trade_depot_tracker_assessment_test/core/app_bars/plain_app_bar.dart';
 import 'package:trade_depot_tracker_assessment_test/core/widgets/app_text_field.dart';
 import 'package:trade_depot_tracker_assessment_test/core/widgets/button_widget.dart';
+import 'package:trade_depot_tracker_assessment_test/presentations/auth/login/login_auth_viewmodel.dart';
 import 'package:trade_depot_tracker_assessment_test/presentations/auth/login/login_view.dart';
-import 'package:trade_depot_tracker_assessment_test/presentations/auth/register/register_email_view.dart';
+import 'package:trade_depot_tracker_assessment_test/presentations/auth/register/register_viewmodel.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/colors.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/styles.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/validations.dart';
 
-class PasswordRegisterView extends StatefulWidget {
-  final String? email;
-  final String? firstLastName;
+class PasswordRegisterView extends ConsumerStatefulWidget {
+  final String email;
+  final String firstLastName;
 
   static String routeName = '/PasswordRegisterView';
   const PasswordRegisterView(
@@ -18,10 +20,11 @@ class PasswordRegisterView extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PasswordRegisterView> createState() => _PasswordRegisterState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PasswordRegisterState();
 }
 
-class _PasswordRegisterState extends State<PasswordRegisterView> {
+class _PasswordRegisterState extends ConsumerState<PasswordRegisterView> {
   final _formKey = GlobalKey<FormState>();
   // Create storage
 
@@ -34,7 +37,7 @@ class _PasswordRegisterState extends State<PasswordRegisterView> {
   final _passwordController = TextEditingController();
 
   // validate login form
-  void validateForm() {
+  Future<void> validateForm() async {
     if (Validations.loginPassword(_passwordController.text) != null) {
       setState(() {
         _isPasswordInvalid = true;
@@ -45,18 +48,31 @@ class _PasswordRegisterState extends State<PasswordRegisterView> {
       });
     }
 
-    // submit the form
+// submit the form
     if (_formKey.currentState!.validate() && !_isPasswordInvalid) {
       _formKey.currentState!.save();
-
       // this submits the form
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginView(),
-        ),
-        (route) => false,
-      );
+
+      final response = await ref.read(authProvider.notifier).createUser(
+            email: widget.email,
+            password: _passwordController.text,
+            fullName: widget.firstLastName,
+          );
+      if (response.successful) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const LoginView(),
+          ),
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.message),
+          ),
+        );
+      }
       // _loginWithEmailAndPassword();
     }
   }
@@ -64,6 +80,7 @@ class _PasswordRegisterState extends State<PasswordRegisterView> {
   @override
   Widget build(BuildContext context) {
     final _mediaQuery = MediaQuery.of(context);
+    final state = ref.watch(authProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -161,21 +178,32 @@ class _PasswordRegisterState extends State<PasswordRegisterView> {
                       height: 20,
                     ),
                     // Show this portion when the keyboard is closed
-                    SizedBox(
-                      width: _mediaQuery.size.width,
-                      child: ButtonWidget(
-                          buttonText: 'Next',
-                          buttonTextStyle: Styles.p2(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
+                    state.status == Status.loading
+                        ? const Align(
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: _mediaQuery.size.width,
+                            child: ButtonWidget(
+                                buttonText: 'Next',
+                                buttonTextStyle: Styles.p2(
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                ),
+                                action: () {
+                                  setState(() {
+                                    validateForm();
+                                  });
+                                }),
                           ),
-                          action: () {
-                            setState(() {
-                              validateForm();
-                            });
-                          }),
-                    ),
                     const SizedBox(
                       height: 16,
                     ),
