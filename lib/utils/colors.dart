@@ -4,6 +4,11 @@ class AppColors {
   AppColors._();
 
   static const darkBlue = Color(0xFF3D3780);
+  static const budgetbg = Color(0xFF3F74FF);
+  static const percentage1 = Color(0xFF52ACFF);
+  static const percentage2 = Color(0xFFFF529B);
+  static const percentage3 = Color(0xFF02B474);
+  static const percentage4 = Color(0xFFFF8514);
   static const xafeBgColor = Color(0xFF0F0627);
   static const buttonBlueColor = Color(0xFF0047FF);
   static const lightBlue = Color(0xFF7E7AAA);
