@@ -73,11 +73,11 @@ class _AppTextFieldState extends State<AppTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        widget.labelText != null
-            ? const SizedBox(
-                height: 10,
-              )
-            : Container(),
+        // widget.labelText != null
+        //     ? const SizedBox(
+        //         height: 10,
+        //       )
+        //     : Container(),
         Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -119,10 +119,11 @@ class _AppTextFieldState extends State<AppTextField> {
               hintStyle: TextStyle(
                 color: Theme.of(context).textTheme.bodyText2?.color,
               ),
-              contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 0,
-              ),
+              contentPadding: widget.contentPadding ??
+                  const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 0,
+                  ),
               focusedBorder: widget.focusedBorder ??
                   OutlineInputBorder(
                     borderSide: const BorderSide(color: AppColors.bgColor),

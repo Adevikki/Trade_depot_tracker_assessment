@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_depot_tracker_assessment_test/core/models/family_expenses_history_model.dart';
+import 'package:trade_depot_tracker_assessment_test/core/services/family_expenses_history_repository.dart';
 import 'package:trade_depot_tracker_assessment_test/core/models/home_page_history_model.dart';
 import 'package:trade_depot_tracker_assessment_test/core/services/family_expenses_history_repository.dart';
 import 'package:trade_depot_tracker_assessment_test/core/services/home_page_history_repository.dart';
@@ -298,8 +299,8 @@ class _FamilyBudgetList extends StatelessWidget {
             final budgetOption = expensesBudgetListOption[index];
             final selectedBudgetSource =
                 ref.watch(familyexpensesHistoryProvider);
-            final isSelected = budgetOption.item == selectedBudgetSource;
-            final icon = budgetOption.icon;
+            // final isSelected = budgetOption.item == selectedBudgetSource;
+            // final icon = budgetOption.icon;
             return ListTile(
               onTap: () {},
               leading: SvgPicture.asset(
