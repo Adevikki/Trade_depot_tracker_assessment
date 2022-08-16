@@ -23,6 +23,7 @@ class AuthTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Color? bordercolor, backgroundColor;
+  final EdgeInsets? contentPadding;
   final bool? autofocus;
   final String? label;
   final String? labelText;
@@ -33,6 +34,7 @@ class AuthTextField extends StatefulWidget {
     Key? key,
     this.width,
     this.height = 60,
+    this.contentPadding,
     this.backgroundColor,
     this.isLoading = false,
     required this.hintText,
@@ -118,7 +120,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
             focusNode: widget.focusNode,
             onFieldSubmitted: widget.onFieldSubmitted,
             decoration: InputDecoration(
-              contentPadding:
+              contentPadding: widget.contentPadding ??
                   const EdgeInsets.only(left: 2, right: 2, top: 2, bottom: 2),
               labelText: widget.labelText,
               alignLabelWithHint: true,
