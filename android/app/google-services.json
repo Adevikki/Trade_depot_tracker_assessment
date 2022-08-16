@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "85898693594",
+    "project_id": "tracker-assessment-auth",
+    "storage_bucket": "tracker-assessment-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85898693594:android:2bed98f16190115c29cee3",
+        "android_client_info": {
+          "package_name": "com.example.trade_depot_tracker_assessment_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85898693594-jjljrnvmulp543g7raq8vfdb5rp6e0ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbFM-pdu2T10HPN8Qpn0gOykQMJcWyRb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85898693594-jjljrnvmulp543g7raq8vfdb5rp6e0ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
