@@ -1,23 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_depot_tracker_assessment_test/core/app_bars/plain_app_bar.dart';
+import 'package:trade_depot_tracker_assessment_test/core/models/api_response.dart';
 import 'package:trade_depot_tracker_assessment_test/core/widgets/app_text_field.dart';
 import 'package:trade_depot_tracker_assessment_test/core/widgets/button_widget.dart';
+import 'package:trade_depot_tracker_assessment_test/presentations/auth/login/login_auth_viewmodel.dart';
+import 'package:trade_depot_tracker_assessment_test/presentations/auth/register/register_viewmodel.dart';
 import 'package:trade_depot_tracker_assessment_test/presentations/home/menu/custom_bottom_navigation.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/colors.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/constants.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/styles.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/validations.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   static String routeName = '/login';
   const LoginView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
   // Create storage
 
@@ -63,15 +69,34 @@ class _LoginViewState extends State<LoginView> {
     // submit the form
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const CustomBottomNavigation(),
+
+      final response = await ref
+          .read(loginAuthProvider.notifier)
+          .loginWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      if (response.successful) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CustomBottomNavigation(),
+          ),
+          (route) => false,
+        );
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+          duration: const Duration(seconds: 2),
         ),
-        (route) => false,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields'),
+          duration: Duration(seconds: 2),
+        ),
       );
     }
-    // this submits the form
   }
 
   AppTextField passwordFieldContainer() {
@@ -110,6 +135,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(loginAuthProvider);
     final _mediaQuery = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -201,19 +227,30 @@ class _LoginViewState extends State<LoginView> {
                         ),
 
                         // Show this portion when the keyboard is closed
-                        SizedBox(
-                          width: _mediaQuery.size.width,
-                          child: ButtonWidget(
-                            buttonText: 'Login',
-                            action: _emailController.text.isNotEmpty &&
-                                    _passwordController.text.isNotEmpty
-                                ? () {
-                                    // validate form
-                                    validateForm();
-                                  }
-                                : null,
-                          ),
-                        ),
+                        state.status == Status.loading
+                            ? const Align(
+                                alignment: Alignment.center,
+                                child: SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: Center(
+                                    child: CircularProgressIndicator.adaptive(),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(
+                                width: _mediaQuery.size.width,
+                                child: ButtonWidget(
+                                  buttonText: 'Login',
+                                  action: _emailController.text.isNotEmpty &&
+                                          _passwordController.text.isNotEmpty
+                                      ? () {
+                                          // validate form
+                                          validateForm();
+                                        }
+                                      : null,
+                                ),
+                              ),
                         const SizedBox(
                           height: 16,
                         ),
