@@ -92,7 +92,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill in all fields'),
+          content: Text('Please fill all fields correctly'),
           duration: Duration(seconds: 2),
         ),
       );
