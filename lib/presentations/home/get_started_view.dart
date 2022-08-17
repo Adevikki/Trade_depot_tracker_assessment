@@ -92,8 +92,12 @@ class GetStartedView extends StatelessWidget {
                     'By continuing, you agree to Xafe’s terms of use \nand privacy policy.',
                     style: Styles.p1(
                       color: Styles.trackerGrey300,
+                      fontSize: 12,
                     ),
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),

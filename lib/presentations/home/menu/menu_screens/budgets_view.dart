@@ -101,7 +101,7 @@ class _BudgetWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 1.48,
+          childAspectRatio: 1.35,
           crossAxisSpacing: 10,
           mainAxisSpacing: 1,
         ),
