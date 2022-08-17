@@ -63,7 +63,7 @@ class _CreateBudgetScreenState extends ConsumerState<CreateBudgetScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 40),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -76,7 +76,7 @@ class _CreateBudgetScreenState extends ConsumerState<CreateBudgetScreen> {
                         color: AppColors.black,
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     AppTextField(
                       labelText: 'Budget name',
                       enabledBorder: InputBorder.none,
@@ -125,7 +125,7 @@ class _CreateBudgetScreenState extends ConsumerState<CreateBudgetScreen> {
                       // },
                     ),
                     const SizedBox(
-                      height: 135,
+                      height: 125,
                     ),
                     SizedBox(
                       width: _mediaQuery.width,

@@ -79,7 +79,7 @@ class _AddExpensesState extends ConsumerState<AddExpenses> {
                         color: AppColors.black,
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     AppTextField(
                       labelText: 'expense amount',
                       enabledBorder: InputBorder.none,
@@ -146,7 +146,7 @@ class _AddExpensesState extends ConsumerState<AddExpenses> {
                       hintText: '',
                     ),
                     const SizedBox(
-                      height: 135,
+                      height: 100,
                     ),
                     SizedBox(
                       width: _mediaQuery.width,
