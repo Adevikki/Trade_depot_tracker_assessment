@@ -157,6 +157,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 10),
                     const Text(
                       'Welcome back',
                       style: TextStyle(

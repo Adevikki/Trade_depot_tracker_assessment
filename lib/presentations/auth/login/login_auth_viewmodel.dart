@@ -16,6 +16,7 @@ class LoginViewmodel extends StateNotifier<LoginState> {
     required String email,
     required String password,
   }) async {
+    state = state.copyWith(status: Status.loading);
     try {
       final response = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -23,17 +24,20 @@ class LoginViewmodel extends StateNotifier<LoginState> {
       );
 
       if (response.user != null) {
+        state = state.copyWith(status: Status.success);
         return ApiResponse(
           message: "Login Successful",
           successful: true,
         );
       } else {
+        state = state.copyWith(status: Status.error);
         return ApiResponse(
           message: "An error occurred",
           successful: false,
         );
       }
     } on FirebaseException catch (e) {
+      state = state.copyWith(status: Status.error);
       return ApiResponse(
         message: e.message ?? "An error occcurred",
         successful: false,

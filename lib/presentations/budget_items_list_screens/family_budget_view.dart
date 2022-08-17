@@ -37,197 +37,190 @@ class FamilyBudgetScreen extends ConsumerWidget {
             bottom: true,
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                return SingleChildScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 30,
-                          left: 20,
-                          right: 20,
-                          bottom: 0,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 16,
-                                  ),
-                                  child: SizedBox(
-                                    width: 24,
-                                    height: 24,
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          if (Navigator.of(context).canPop()) {
-                                            Navigator.pop(context);
-                                          }
-                                        },
-                                        child: SvgPicture.asset(
-                                          '$kImagePath/back_arrow.svg',
-                                          width: 24,
-                                          height: 24,
-                                          semanticsLabel: 'Back',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Family',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.white,
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                    child: SizedBox(
-                                      height: 50,
-                                      width: 50,
-                                      child: SvgPicture.asset(
-                                        '$kImagePath/plus_icon.svg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        isScrollControlled: true,
-                                        builder: (BuildContext context) {
-                                          return const SelectSourceBottomSheet();
-                                        },
-                                      );
-                                    })
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 0, right: 20, top: 40),
-                                  child: Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: const [
-                                      Text(
-                                        '\$200.00 ',
-                                        style: TextStyle(
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        'spent',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: LinearProgressIndicator(
-                                    value: 0.5,
-                                    minHeight: 10,
-                                    color: AppColors.white,
-                                    backgroundColor:
-                                        Colors.white.withOpacity(0.3),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 17,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.3),
-                                      borderRadius: BorderRadius.circular(40),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5,
-                                          bottom: 5,
-                                          left: 10,
-                                          right: 10),
-                                      child: Text(
-                                        '\$1000/month',
-                                        style: Styles.captions2(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16,
-                                          color: AppColors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 30,
+                        left: 20,
+                        right: 20,
+                        bottom: 0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          // horizontal: 20,
-                          vertical: 70,
-                        ),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minHeight: constraints.maxHeight,
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 24,
-                            ),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 5,
-                                  width: 50,
-                                  child: SvgPicture.asset(
-                                    '$kImagePath/line.svg',
-                                    fit: BoxFit.cover,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 16,
+                                ),
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (Navigator.of(context).canPop()) {
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      child: SvgPicture.asset(
+                                        '$kImagePath/back_arrow.svg',
+                                        width: 24,
+                                        height: 24,
+                                        semanticsLabel: 'Back',
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 30),
-                                Column(
+                              ),
+                              const Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Family',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                  child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: SvgPicture.asset(
+                                      '$kImagePath/plus_icon.svg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (BuildContext context) {
+                                        return const SelectSourceBottomSheet();
+                                      },
+                                    );
+                                  })
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 0, right: 20, top: 40),
+                                child: Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.end,
                                   children: const [
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        'Expense History',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.black,
-                                        ),
+                                    Text(
+                                      '\$200.00 ',
+                                      style: TextStyle(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      'spent',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.white,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 20),
-                                AsyncValueWidget<FamilyExpensesHistoryList>(
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: LinearProgressIndicator(
+                                  value: 0.5,
+                                  minHeight: 10,
+                                  color: AppColors.white,
+                                  backgroundColor:
+                                      Colors.white.withOpacity(0.3),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 17,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5, left: 10, right: 10),
+                                    child: Text(
+                                      '\$1000/month',
+                                      style: Styles.captions2(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 70,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            // vertical: 24,
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 5,
+                                width: 50,
+                                child: SvgPicture.asset(
+                                  '$kImagePath/line.svg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                              Column(
+                                children: const [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Expense History',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              Expanded(
+                                child:
+                                    AsyncValueWidget<FamilyExpensesHistoryList>(
                                   value: familyExpensesOptions,
                                   data: (budgetSourceOptions) {
                                     return _FamilyBudgetList(
@@ -254,22 +247,22 @@ class FamilyBudgetScreen extends ConsumerWidget {
                                     );
                                   },
                                 ),
-                              ],
-                            ),
-                            height: _mediaQuery.height,
-                            width: _mediaQuery.width,
-                            decoration: const BoxDecoration(
-                              color: Styles.trackerWhite,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(24),
-                                topRight: Radius.circular(24),
                               ),
+                            ],
+                          ),
+                          // height: _mediaQuery.height,
+                          width: _mediaQuery.width,
+                          decoration: const BoxDecoration(
+                            color: Styles.trackerWhite,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
             ),
