@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -102,7 +100,7 @@ class _CustomBottomNavigationBarState
                 bottomBarMenu(
                   context: context,
                   image: _selectedIndex == 1
-                      ? '$kImagePath/categories_selected.png'
+                      ? '$kImagePath/categories.svg'
                       : '$kImagePath/categories.svg',
                   selectIndex: 1,
                   text: 'Categories',
@@ -160,5 +158,3 @@ class _CustomBottomNavigationBarState
     );
   }
 }
-
-

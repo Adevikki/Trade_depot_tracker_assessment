@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trade_depot_tracker_assessment_test/core/models/budget_model.dart';
 import 'package:trade_depot_tracker_assessment_test/presentations/auth/login/login_view.dart';
 import 'package:trade_depot_tracker_assessment_test/presentations/budget_items_list_screens/family_budget_view.dart';
+import 'package:trade_depot_tracker_assessment_test/presentations/home/menu/menu_screens/home_view.dart';
 import 'package:trade_depot_tracker_assessment_test/utils/colors.dart';
 
 typedef BudgetList = List<BudgetClass>;
@@ -30,7 +31,7 @@ class BudgetRepository {
             amount: '\$40/month',
             progress: 0.7,
             color: AppColors.percentage1,
-            route: LoginView()),
+            route: HomeScreen()),
         BudgetClass(
             item: ItemSource.item2,
             itemName: 'Family',
@@ -44,14 +45,14 @@ class BudgetRepository {
             amount: '\$35/month',
             progress: 0.3,
             color: AppColors.percentage3,
-            route: LoginView()),
+            route: HomeScreen()),
         BudgetClass(
             item: ItemSource.item4,
             itemName: 'Clothing',
             amount: '\$235/month',
             progress: 0.4,
             color: AppColors.percentage4,
-            route: LoginView()),
+            route: HomeScreen()),
         BudgetClass(
             item: ItemSource.item5,
             itemName: '',
